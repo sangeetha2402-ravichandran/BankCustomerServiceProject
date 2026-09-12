@@ -1251,20 +1251,7 @@ A clean repository can organise the implemented artefacts as follows:
 GBank/
 |
 |-- README.md
-|
-|-- docs/
-|   |
-|   |-- images/
-|       |-- 01-email-trigger-contact-lookup.png
-|       |-- 02-email-flow-condition.png
-|       |-- 03-escalation-condition.png
-|       |-- 04-escalation-failure-troubleshooting.png
-|       |-- 05-flow-run-condition-result.png
-|       |-- 06-existing-case-lookup.png
-|       |-- 07-case-update.png
-|       |-- 08-note-creation-expression.png
-|       |-- 09-plugin-step-registration.png
-|       |-- 10-plugin-unit-test-pass.png
+
 |
 |-- plugins/
 |   |-- README.md
