@@ -1429,8 +1429,3 @@ The implementation is designed as a **hands-on enterprise portfolio project** an
 
 ---
 
-## Disclaimer
-
-This project is created for **learning, interview preparation and portfolio demonstration**.
-
-It is not a production banking system and is not connected to real banking customers, accounts or financial transactions.
