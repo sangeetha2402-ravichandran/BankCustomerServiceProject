@@ -1,0 +1,194 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cr805_sharedcommondataserviceforapps_b8f42"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "When_a_row_is_added,_modified_or_deleted": {
+          "metadata": {
+            "operationMetadataId": "2b8a9e01-390a-45db-bb5a-801fa8d8c334"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 1,
+              "subscriptionRequest/entityname": "incident",
+              "subscriptionRequest/scope": 4
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Condition": {
+          "actions": {
+            "Update_a_row": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "cb0a0877-7b04-4065-94f6-b31c0e96fce2"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "UpdateOnlyRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "incidents",
+                  "recordId": "@triggerOutputs()?['body/incidentid']",
+                  "item/prioritycode": 1,
+                  "item/cr805_escalationrequired": true
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {},
+          "expression": {
+            "equals": [
+              "@triggerOutputs()?['body/cr805_casecategory']",
+              576030002
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "be303f52-55ed-44de-ad3e-dc4dea6b0f50"
+          },
+          "type": "If"
+        },
+        "Condition_2": {
+          "actions": {
+            "Update_a_row_2": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "5f7a5fbf-5a68-4468-931c-506b686a6c29"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "UpdateOnlyRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "incidents",
+                  "recordId": "@outputs('Update_a_row')?['body/incidentid']",
+                  "item/prioritycode": 1,
+                  "item/isescalated": true
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {
+            "Condition": [
+              "Succeeded"
+            ]
+          },
+          "expression": {
+            "equals": [
+              "@outputs('Update_a_row')?['body/cr805_customertier']",
+              576030002
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "39877c68-c664-4f59-b16a-0079f059b1d3"
+          },
+          "type": "If"
+        },
+        "Condition_3": {
+          "actions": {
+            "List_rows": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "d426fc6e-fb4b-4da0-8d30-c5c6c3530ff2"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "queues",
+                  "$filter": "name eq 'Fraud'",
+                  "$top": 1
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Perform_a_bound_action": {
+              "runAfter": {
+                "List_rows": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "5d788cc1-c558-42e3-9fcb-9c291aaf8a01"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "PerformBoundAction",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "queues",
+                  "actionName": "Microsoft.Dynamics.CRM.AddToQueue",
+                  "recordId": "@first(outputs('List_rows')?['body/value'])?['queueid']",
+                  "item/Target": "@concat('incidents(', triggerOutputs()?['body/incidentid'], ')')"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {
+            "Condition_2": [
+              "Succeeded"
+            ]
+          },
+          "expression": {
+            "equals": [
+              "@outputs('Update_a_row_2')?['body/cr805_casecategory']",
+              576030002
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "1688d0c4-578e-498f-96b9-f7143aeceb78"
+          },
+          "type": "If"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

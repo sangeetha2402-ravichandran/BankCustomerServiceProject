@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppModuleSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SiteMapUniqueName>cr805_BankCustomerService</SiteMapUniqueName>
+  <EnableCollapsibleGroups>False</EnableCollapsibleGroups>
+  <ShowHome>True</ShowHome>
+  <ShowPinned>True</ShowPinned>
+  <ShowRecents>True</ShowRecents>
+  <SiteMap IntroducedVersion="7.0.0.0">
+    <Area Id="area_81f38370" ResourceId="SitemapDesigner.NewTitle" DescriptionResourceId="SitemapDesigner.NewTitle" ShowGroups="true" IntroducedVersion="7.0.0.0">
+      <Titles>
+        <Title LCID="1033" Title="Customers" />
+      </Titles>
+      <Group Id="NewGroup_d76fcffd8" ResourceId="SitemapDesigner.NewGroup" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
+        <Titles>
+          <Title LCID="1033" Title="Customers" />
+        </Titles>
+        <SubArea Id="NewSubArea_b2dc4fd5" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="account" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="NewSubArea_f6c16d398" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="contact" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_af060e88" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="knowledgearticle" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+      </Group>
+      <Group Id="NewGroup_d9e447058" ResourceId="SitemapDesigner.NewGroup" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
+        <Titles>
+          <Title LCID="1033" Title="Customer Service" />
+        </Titles>
+        <SubArea Id="NewSubArea_4a3dc4d88" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="incident" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+      </Group>
+      <Group Id="NewGroup_9fb2424" ResourceId="SitemapDesigner.NewGroup" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
+        <Titles>
+          <Title LCID="1033" Title="Banking" />
+        </Titles>
+        <SubArea Id="NewSubArea_92c45464" Entity="cr805_banktransaction" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+      </Group>
+    </Area>
+  </SiteMap>
+  <LocalizedNames>
+    <LocalizedName description="Bank Customer Service" languagecode="1033" />
+  </LocalizedNames>
+</AppModuleSiteMap>

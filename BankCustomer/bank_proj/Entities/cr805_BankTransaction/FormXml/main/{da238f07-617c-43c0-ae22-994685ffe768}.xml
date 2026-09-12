@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{da238f07-617c-43c0-ae22-994685ffe768}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{200ed2a7-bebb-4b4b-b402-86352c122f1e}" IsUserDefined="1" visible="true">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{809a8e05-12ac-435a-8e24-5e769376469c}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{54fe59bc-b896-4220-9b75-760a0c7816da}">
+                        <labels>
+                          <label description="Transaction Name" languagecode="1033" />
+                        </labels>
+                        <control id="cr805_transactionname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="cr805_transactionname" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{53467134-3e94-4f8d-a69c-e8cae1c85fd8}">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{bb919a16-7cec-4962-9cd2-40b8a9259e1a}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Transaction ID" languagecode="1033" />
+                        </labels>
+                        <control id="cr805_transactionid" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="cr805_transactionid" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="null_section_3" id="8fb3520e-bb91-41e6-9710-db98e7a9db45" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{8f4283c9-6193-402a-9f64-509faf94400c}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Account" languagecode="1033" />
+                        </labels>
+                        <control id="cr805_account" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="cr805_account" disabled="false" />
+                      </cell>
+                      <cell id="{8cc57007-0b5a-49c9-8bbc-c657bdb8d615}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Transaction Type" languagecode="1033" />
+                        </labels>
+                        <control id="cr805_transactiontype" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="cr805_transactiontype" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{8e8df7f6-3174-4c4a-bdd1-038aaa2b65f9}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Transaction Status" languagecode="1033" />
+                        </labels>
+                        <control id="cr805_transactionstatus" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="cr805_transactionstatus" disabled="false" />
+                      </cell>
+                      <cell id="{0c5fceb1-bed2-46ed-8721-9ddcb948a1bd}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Merchant Name" languagecode="1033" />
+                        </labels>
+                        <control id="cr805_merchantname" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="cr805_merchantname" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{94713d9b-9701-433a-883f-6e5f991b0f4c}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Amount" languagecode="1033" />
+                        </labels>
+                        <control id="cr805_amount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="cr805_amount" disabled="false" />
+                      </cell>
+                      <cell id="{bc421180-4b38-485b-b3ab-040477bdaea3}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Fraud Suspected" languagecode="1033" />
+                        </labels>
+                        <control id="cr805_fraudsuspected" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="cr805_fraudsuspected" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{3b1a8c2b-a3af-4c72-bf12-6bac6f2003ff}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Transaction Date" languagecode="1033" />
+                        </labels>
+                        <control id="cr805_transactiondate" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="cr805_transactiondate" disabled="false" />
+                      </cell>
+                      <cell locklevel="0" id="{c80dae1b-46c7-4a80-8008-b5ecd62d94d5}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{58ad3acd-60b7-42b1-bc3b-a40b0c04eaa6}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Reference Number" languagecode="1033" />
+                        </labels>
+                        <control id="cr805_referencenumber" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="cr805_referencenumber" disabled="false" />
+                      </cell>
+                      <cell locklevel="0" id="{b1ecd5bb-f785-4eb1-a713-bb53104ca431}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{7e0bce54-ff7b-45b6-b68d-817405f2327c}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{d6c0b645-a1a3-488e-a905-463fd8923a1a}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{91f7aae2-dfdd-4944-acb8-149618030b85}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{d0eb0c19-0642-4e46-9f4a-be1e206c9986}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{a9e5a731-dda9-4856-9920-a930bfb6d099}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{7f2287d0-528b-4ab0-9407-198173ad9582}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{f7f8b36c-401b-4157-bd91-b594a5aad7c6}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{3b11c418-0ac9-42d4-9e1c-66f1343fed51}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+      <formLibraries>
+        <Library name="cr805_caseform" libraryUniqueId="{784d8de3-9634-487d-a32b-a014032dd1b2}" />
+      </formLibraries>
+      <events>
+        <event name="onsave" application="false" active="false">
+          <Handlers>
+            <Handler functionName="handleBankTransaction" libraryName="cr805_caseform" handlerUniqueId="{406fa206-2524-4fc1-a670-80602cabae4c}" enabled="true" parameters="" passExecutionContext="true" />
+          </Handlers>
+        </event>
+      </events>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

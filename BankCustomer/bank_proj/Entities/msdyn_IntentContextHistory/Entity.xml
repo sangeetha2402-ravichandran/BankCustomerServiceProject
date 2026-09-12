@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name LocalizedName="Intent Context History" OriginalName="Intent Context History">msdyn_IntentContextHistory</Name>
+  <EntityInfo>
+    <entity Name="msdyn_IntentContextHistory" unmodified="1">
+      <attributes>
+        <attribute PhysicalName="msdyn_RelatedRecordID" unmodified="1">
+          <Type>lookup</Type>
+          <Name>msdyn_relatedrecordid</Name>
+          <LogicalName>msdyn_relatedrecordid</LogicalName>
+          <RequiredLevel>required</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>0</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <LookupStyle>polymorphic</LookupStyle>
+          <displaynames>
+            <displayname description="Related Record" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Primary entity record the intent context is related to" languagecode="1033" />
+          </Descriptions>
+        </attribute>
+      </attributes>
+    </entity>
+  </EntityInfo>
+  <RibbonDiffXml />
+</Entity>

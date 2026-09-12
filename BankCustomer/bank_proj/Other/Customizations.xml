@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImportExportXml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26082.162" OrganizationSchemaType="Full" CRMServerServiceabilityVersion="9.2.26082.00162">
+  <Entities />
+  <Roles />
+  <Workflows />
+  <FieldSecurityProfiles />
+  <Templates />
+  <EntityMaps />
+  <EntityRelationships />
+  <OrganizationSettings />
+  <optionsets />
+  <InteractionCentricDashboards />
+  <WebResources />
+  <CustomControls />
+  <AppModuleSiteMaps />
+  <AppModules />
+  <EntityDataProviders />
+  <CanvasApps />
+  <connectionreferences>
+    <connectionreference connectionreferencelogicalname="cr805_sharedcommondataserviceforapps_b8f42">
+      <connectionreferencedisplayname>Microsoft Dataverse trial-b8f42</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="cr805_sharedoffice365_d3068">
+      <connectionreferencedisplayname>Office 365 Outlook trial-d3068</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_office365</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+  </connectionreferences>
+  <Languages>
+    <Language>1033</Language>
+  </Languages>
+</ImportExportXml>

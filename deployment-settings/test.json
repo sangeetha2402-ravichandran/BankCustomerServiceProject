@@ -1,0 +1,34 @@
+{
+  "EnvironmentVariables": [
+    {
+      "SchemaName": "cr805_ExternalAPIURL",
+      "Value": "https://jsonplaceholder.typicode.com/todos/1",
+      "Name": {
+        "Default": "External API URL",
+        "ByLcid": {
+          "1033": "External API URL"
+        }
+      },
+      "TypeId": 100000000,
+      "IsRequired": false
+    }
+  ],
+  "ConnectionReferences": [
+    {
+      "LogicalName": "cr805_sharedapprovals_76bd5",
+      "ConnectionId": "c1037203066e4eafb5077e513fa6827c",
+      "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_approvals"
+    },
+    {
+      "LogicalName": "cr805_sharedcommondataserviceforapps_b8f42",
+      "ConnectionId": "924f573cba8d4bf0ba7d1a867885a29c",
+      "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+    },
+    {
+      "LogicalName": "cr805_sharedoffice365_d3068",
+      "ConnectionId": "2a7efd4d2e604fa89140cc7891e0834a",
+      "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+    }
+  ],
+  "CopilotAgents": []
+}

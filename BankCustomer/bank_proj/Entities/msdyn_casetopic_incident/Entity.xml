@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name LocalizedName="Case topic Incident mapping" OriginalName="Case topic Incident mapping">msdyn_casetopic_incident</Name>
+  <RibbonDiffXml />
+</Entity>

@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name LocalizedName="Most Contacted" OriginalName="Most Contacted">msdyn_mostcontacted</Name>
+  <RibbonDiffXml />
+</Entity>

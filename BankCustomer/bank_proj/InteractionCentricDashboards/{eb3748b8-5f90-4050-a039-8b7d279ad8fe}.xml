@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<InteractionCentricDashboard unmodified="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <LocalizedNames>
+    <LocalizedName description="Cases Dashboard" languagecode="1033" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="Shows an overview of data related to cases." languagecode="1033" />
+  </Descriptions>
+  <FormId>{eb3748b8-5f90-4050-a039-8b7d279ad8fe}</FormId>
+</InteractionCentricDashboard>

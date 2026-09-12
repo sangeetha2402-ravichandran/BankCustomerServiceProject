@@ -1,0 +1,125 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cr805_sharedcommondataserviceforapps_b8f42"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      },
+      "shared_office365": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cr805_sharedoffice365_d3068"
+        },
+        "api": {
+          "name": "shared_office365"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "When_a_row_is_added,_modified_or_deleted": {
+          "metadata": {
+            "operationMetadataId": "eb0e51d9-2dfe-4378-a73d-13a19e01ffff"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 3,
+              "subscriptionRequest/entityname": "incident",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filteringattributes": "statuscode"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Get_a_row_by_ID": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "5dbad241-d6b9-4ad3-88ac-218ed5cd44a3"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "GetItem",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "incidents",
+              "recordId": "@triggerOutputs()?['body/incidentid']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Condition": {
+          "actions": {
+            "Send_an_email_(V2)": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "1626700a-54c0-4c8f-9308-6e7efdb75f53"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_office365",
+                  "operationId": "SendEmailV2",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+                },
+                "parameters": {
+                  "emailMessage/To": "sangeeetha2402.ravichandran@outlook.com",
+                  "emailMessage/Subject": "Update on your banking case - @{outputs('Get_a_row_by_ID')?['body/title']}",
+                  "emailMessage/Body": "<p>Hello,<br>\n<br>\nThere has been an update to your banking case.<br>\n<br>\nCase: @{outputs('Get_a_row_by_ID')?['body/title']}<br>\nStatus: @{outputs('Get_a_row_by_ID')?['body/statuscode']}<br>\nResolution Type: @{outputs('Get_a_row_by_ID')?['body/cr805_resolutiontype']}<br>\nResolution Description:@{outputs('Get_a_row_by_ID')?['body/cr805_resolutiondescription']}<br>\n<br>\nThank you.</p>",
+                  "emailMessage/Importance": "Normal"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {
+            "Get_a_row_by_ID": [
+              "Succeeded"
+            ]
+          },
+          "expression": {
+            "not": {
+              "equals": [
+                "@outputs('Get_a_row_by_ID')?['body/statuscode']",
+                1
+              ]
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "2fe646d6-c355-40e7-a1b5-f1c24ab747f0"
+          },
+          "type": "If"
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

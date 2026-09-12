@@ -1,0 +1,524 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{4a63c8d1-6c1e-48ec-9db4-3e6c7155334c}</formid>
+    <IntroducedVersion>5.0.0.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form enablerelatedinformation="false" shownavigationbar="true" hasmargin="false" headerdensity="HighWithControls">
+      <tabs showlabels="true">
+        <tab name="general" verticallayout="true" id="{564b9a08-4626-46f5-8bd8-3d31e17a8873}" IsUserDefined="0" ordinalvalue="0">
+          <columns>
+            <column width="30%" id="0">
+              <sections>
+                <section name="Details" showlabel="true" labelwidth="102" showbar="false" id="{09d03c8d-5a6b-4a94-b7d9-cfa1b5364015}" IsUserDefined="0" locklevel="0" celllabelposition="Left" ordinalvalue="0">
+                  <rows>
+                    <row>
+                      <cell id="{70cc3529-ab81-650b-3bd0-3147ba77667d}" showlabel="true" locklevel="0" ordinalvalue="10000">
+                        <labels>
+                          <label description="Case Title" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{b6f69544-6287-4b8a-b60c-3d66f1cac75d}" userspacer="0" ordinalvalue="10002">
+                        <labels>
+                          <label description="Subject" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{b579ee22-ced2-44ed-0bb8-8290e9b23164}" showlabel="true" locklevel="0" ordinalvalue="10003">
+                        <labels>
+                          <label description="Customer" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{76d17ce6-ce11-da3c-aeee-e2886e506221}" showlabel="true" locklevel="0" ordinalvalue="10004">
+                        <labels>
+                          <label description="Origin" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{26940645-ec02-4f99-bbcf-c4cc33a2be4c}" showlabel="true" locklevel="0" ordinalvalue="10005">
+                        <labels>
+                          <label description="Contact" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{959273e2-e600-3b18-6572-763b94414e67}" showlabel="true" locklevel="0" ordinalvalue="10006">
+                        <labels>
+                          <label description="Entitlement" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{2973ce06-0486-461f-9381-48a174703d01}" ordinalvalue="10007">
+                        <labels>
+                          <label description="Product" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section id="{2335806E-F713-402F-A9BD-6BEEEC6B8645}" columns="1" showlabel="true" showbar="false" IsUserDefined="0" locklevel="0" height="auto" ordinalvalue="2" solutionaction="Modified">
+                  <rows>
+                    <row>
+                      <cell id="{2D8C61A2-7CFC-4DD8-A8AF-2CB82760E559}" showlabel="false" locklevel="0" rowspan="8" auto="true" ordinalvalue="10000">
+                        <labels>
+                          <label description="Description" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="Applicable SLA(STANDARD)" showlabel="true" labelwidth="102" showbar="false" id="{bb13b0a3-13ee-4f84-9172-c1d89622b421}" IsUserDefined="0" locklevel="0" celllabelposition="Left" visible="true" ordinalvalue="3" solutionaction="Modified">
+                  <rows>
+                    <row>
+                      <cell id="{9ed95127-7c3c-9c3e-a424-07d8144a246d}" showlabel="true" locklevel="0" ordinalvalue="10000">
+                        <labels>
+                          <label description="First Response By" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{573b6d21-4cc3-20c7-00c0-97160b24567a}" showlabel="true" locklevel="0" ordinalvalue="10001">
+                        <labels>
+                          <label description="Resolve By" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell showlabel="true" locklevel="0" id="{0d42ad9c-8623-43b9-b657-b21447cf337c}" rowspan="10" colspan="1" ordinalvalue="10002" solutionaction="Added">
+                        <labels>
+                          <label description="Knowledge" languagecode="1033" />
+                        </labels>
+                        <control id="Search_widget_new_1" classid="{E616A57F-20E0-4534-8662-A101B5DDF4E0}">
+                          <parameters>
+                            <NumberOfResults>10</NumberOfResults>
+                            <SelectDefaultLanguage>00000000-0000-0000-0000-000000000000</SelectDefaultLanguage>
+                            <FilterResults>3</FilterResults>
+                            <ShowContextualActions>ShowAll</ShowContextualActions>
+                            <EnableAutoSuggestions>false</EnableAutoSuggestions>
+                            <EnableRating>false</EnableRating>
+                            <ShowLanguageFilter>false</ShowLanguageFilter>
+                            <AllowChangingFiltersOnUI>true</AllowChangingFiltersOnUI>
+                            <AutoSuggestionSource>0</AutoSuggestionSource>
+                            <SearchForAutoSuggestionsUsing>contractdetailid</SearchForAutoSuggestionsUsing>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="Route Case" showlabel="false" showbar="false" locklevel="0" id="{aba0c0c2-516c-8cd2-0261-da13e0b66b3b}" IsUserDefined="0" labelwidth="115" celllabelposition="Left" visible="false" ordinalvalue="4" solutionaction="Modified">
+                  <rows>
+                    <row>
+                      <cell id="{b6893e15-2268-ed85-686d-8572ca82b1e4}" showlabel="true" locklevel="0" visible="false" ordinalvalue="10000">
+                        <labels>
+                          <label description="Route Case" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="general_section_10" id="4af583b8-cff5-4baf-a319-aaf8e2fc8060" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115" ordinalvalue="1" solutionaction="Added">
+                  <labels>
+                    <label description="Banking Details" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{d64b5d09-8751-4ef0-89ec-f8f02cc28ff3}" locklevel="0" colspan="1" rowspan="1" ordinalvalue="10000">
+                        <labels>
+                          <label description="Case Category" languagecode="1033" />
+                        </labels>
+                        <control id="cr805_casecategory" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="cr805_casecategory" disabled="false" />
+                      </cell>
+                      <cell id="{368f9d43-55d4-4ab4-ad1b-3556bad1b97f}" locklevel="0" colspan="1" rowspan="1" ordinalvalue="20001">
+                        <labels>
+                          <label description="Customer Tier" languagecode="1033" />
+                        </labels>
+                        <control id="cr805_customertier" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="cr805_customertier" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{04ea9da1-9e4e-4fb0-99e9-49da57da9780}" locklevel="0" colspan="1" rowspan="1" ordinalvalue="10002">
+                        <labels>
+                          <label description="Issue Type" languagecode="1033" />
+                        </labels>
+                        <control id="cr805_issuetype" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="cr805_issuetype" disabled="false" />
+                      </cell>
+                      <cell id="{16dd5bbe-16b4-4a4e-82c9-6b7e6c224289}" locklevel="0" colspan="1" rowspan="1" ordinalvalue="20003">
+                        <labels>
+                          <label description="Transaction ID" languagecode="1033" />
+                        </labels>
+                        <control id="cr805_transactionid" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="cr805_transactionid" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{8348ecd5-f5fb-4eb2-9d70-1a13c573b8f8}" locklevel="0" colspan="1" rowspan="1" ordinalvalue="10004">
+                        <labels>
+                          <label description="Bank Transaction" languagecode="1033" />
+                        </labels>
+                        <control id="cr805_banktransaction" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="cr805_banktransaction" disabled="false" />
+                      </cell>
+                      <cell id="{974c5b09-a0c8-4b27-8b21-ba78325e3988}" locklevel="0" colspan="1" rowspan="1" ordinalvalue="20005">
+                        <labels>
+                          <label description="Escalation Required" languagecode="1033" />
+                        </labels>
+                        <control id="cr805_escalationrequired" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="cr805_escalationrequired" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{41fc5fb0-7c86-4fb8-be52-c4b11d2d693b}" locklevel="0" colspan="1" rowspan="1" ordinalvalue="10006">
+                        <labels>
+                          <label description="Resolution Description" languagecode="1033" />
+                        </labels>
+                        <control id="cr805_resolutiondescription" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="cr805_resolutiondescription" disabled="false" />
+                      </cell>
+                      <cell locklevel="0" id="{b6fa84a1-b047-4971-9d7a-0dc2385be68e}" ordinalvalue="20007">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{79b2d0d3-5c0f-46a0-b20b-c8ff4cf1a79f}" locklevel="0" colspan="1" rowspan="1" ordinalvalue="10008">
+                        <labels>
+                          <label description="Resolution Type" languagecode="1033" />
+                        </labels>
+                        <control id="cr805_resolutiontype" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="cr805_resolutiontype" disabled="false" />
+                      </cell>
+                      <cell locklevel="0" id="{c142d0b5-101c-45de-a42b-7d9527997ce9}" ordinalvalue="20009">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{c9662aca-0daf-4f03-b9ac-b9819c30016c}" locklevel="0" colspan="1" rowspan="1" ordinalvalue="10010">
+                        <labels>
+                          <label description="External Transaction Status" languagecode="1033" />
+                        </labels>
+                        <control id="cr805_externaltransactionstatus" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="cr805_externaltransactionstatus" disabled="false" />
+                      </cell>
+                      <cell locklevel="0" id="{a86eefb6-4e63-4ca9-971b-0c40b3d95734}" ordinalvalue="20011">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="30%" id="2">
+              <sections>
+                <section name="Customer" showlabel="false" labelwidth="90" showbar="false" id="{e493f95f-d913-4063-a929-e86a5d7b01a5}" IsUserDefined="0" locklevel="0" ordinalvalue="1">
+                  <rows>
+                    <row>
+                      <cell id="{eafbc418-2de0-485f-9f9a-590f97e0389d}" colspan="2" showlabel="false" locklevel="1" ordinalvalue="10000">
+                        <labels>
+                          <label description="Customer" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab name=" Enhanced_SLA_Details_Tab" id="{70a83419-91af-4c8e-b39e-42bf8fa286f3}" IsUserDefined="0" showlabel="true" expanded="false" ordinalvalue="3">
+          <columns>
+            <column width="34%" id="0">
+              <sections>
+                <section name="Applicable SLA(ENHANCED)" showlabel="false" labelwidth="102" showbar="false" id="{29840d59-02b1-4990-b675-5bf0c22b49f4}" IsUserDefined="0" locklevel="0" celllabelposition="Left" visible="true" ordinalvalue="0">
+                  <rows>
+                    <row height="30">
+                      <cell id="{347988d6-75a0-4464-bf4c-098e348c1a0d}" colspan="1" showlabel="false" ordinalvalue="10000">
+                        <labels>
+                          <label description="First Response By KPI" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row height="30">
+                      <cell id="{c26fcdc2-fdac-4bed-a853-cfb9438d2591}" colspan="1" showlabel="false" ordinalvalue="10001">
+                        <labels>
+                          <label description="Resolve By KPI" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab name="ADDITIONALDETAILS_TAB" id="{5695eced-80f3-4983-9bbd-346db51478d1}" IsUserDefined="0" showlabel="true" expanded="false" ordinalvalue="4">
+          <columns>
+            <column width="34%" id="0">
+              <sections>
+                <section name="parentcaseandtype" showlabel="false" showbar="false" id="{07de2e7a-2f94-472e-bbab-f41a8ae8b7b9}" IsUserDefined="0" layout="varwidth" labelwidth="102" celllabelposition="Left" ordinalvalue="0">
+                  <rows>
+                    <row>
+                      <cell id="{622a5065-a78e-4caf-ad1a-9ccafe579e93}" showlabel="true" locklevel="0" ordinalvalue="10001">
+                        <labels>
+                          <label description="Parent Case" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="33%" id="1">
+              <sections>
+                <section name="escalations" showlabel="false" showbar="false" id="{7de777d6-09a9-41ab-81c1-160fa8b43f0f}" IsUserDefined="0" layout="varwidth" labelwidth="102" celllabelposition="Left" ordinalvalue="0">
+                  <rows>
+                    <row>
+                      <cell id="{09c5bc1b-4992-4b9b-9077-b6cc1c73fbb3}" showlabel="true" locklevel="0" ordinalvalue="10001">
+                        <labels>
+                          <label description="Escalated On" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="33%" id="2">
+              <sections>
+                <section name="responses" showlabel="false" showbar="false" id="{5d2b7d89-424e-4b9f-ad7f-76aae92eea18}" IsUserDefined="0" layout="varwidth" labelwidth="102" celllabelposition="Left" ordinalvalue="0">
+                  <rows>
+                    <row>
+                      <cell id="{420032d6-21a9-4ca2-95f9-dcf3b9684d78}" showlabel="true" locklevel="0" ordinalvalue="10000">
+                        <labels>
+                          <label description="Follow Up By" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{c5fdfac4-9406-4ad1-b114-f409eec9e514}" showlabel="true" locklevel="0" ordinalvalue="10001">
+                        <labels>
+                          <label description="First Response Sent" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab name="SOCIALDETAILS_TAB" id="{5b41e0a6-d4da-4ee5-871f-373f2b55109e}" IsUserDefined="0" showlabel="true" expanded="false" ordinalvalue="5">
+          <columns>
+            <column width="34%" id="0">
+              <sections>
+                <section name="social" showlabel="false" showbar="false" id="{6ef467d9-a025-420c-bb36-9b2d4a9642d9}" IsUserDefined="0" layout="varwidth" labelwidth="102" celllabelposition="Left" ordinalvalue="0">
+                  <rows>
+                    <row>
+                      <cell id="{acb2c742-73f1-4545-970a-870272bf1eb9}" showlabel="true" locklevel="0" ordinalvalue="10000">
+                        <labels>
+                          <label description="Social Profile" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{0b018f6d-2937-4c0b-93f0-ae5f02280e2e}" showlabel="true" locklevel="0" ordinalvalue="10001">
+                        <labels>
+                          <label description="Received As" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="33%" id="1">
+              <sections>
+                <section name="scores" showlabel="false" showbar="false" id="{ec17cdd5-a6e6-4ff6-bc99-1eb782e55ecf}" IsUserDefined="0" layout="varwidth" labelwidth="102" celllabelposition="Left" ordinalvalue="0">
+                  <rows>
+                    <row>
+                      <cell id="{10B6F366-35D9-4213-A88E-0B1B518E29DD}" showlabel="true" locklevel="0" ordinalvalue="10000">
+                        <labels>
+                          <label description="Influence Score" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="33%" id="2">
+              <sections>
+                <section name="social3" showlabel="false" showbar="false" id="{5b9659ae-d657-4886-98a8-4b87bd53e651}" IsUserDefined="0" layout="varwidth" labelwidth="102" celllabelposition="Left" ordinalvalue="0">
+                  <rows>
+                    <row>
+                      <cell id="{e7695773-b77d-4285-b57a-339cadbc233e}" showlabel="true" locklevel="0" ordinalvalue="10000">
+                        <labels>
+                          <label description="Blocked Profile" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab name="KBARTICLE_TAB" id="{6539ac26-1798-4e6a-af34-c98a254b2b5f}" IsUserDefined="0" showlabel="true" expanded="false" ordinalvalue="6">
+          <columns>
+            <column width="50%" id="0">
+              <sections>
+                <section name="kb article" labelwidth="160" showlabel="true" showbar="true" locklevel="1" id="{9404c284-21bf-4194-a6d7-cdc9291b9f19}" IsUserDefined="0" ordinalvalue="0">
+                  <rows>
+                    <row>
+                      <cell colspan="2" id="{44424fb9-0507-4f9f-b42f-3d76f7c4d30d}" ordinalvalue="10000">
+                        <labels>
+                          <label description="Knowledge Base Article" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="50%" id="1">
+              <sections>
+                <section name="contract and product information" showlabel="true" showbar="true" id="{4f1cbb62-1166-4db3-a0d7-1844cea74945}" IsUserDefined="0" locklevel="0" ordinalvalue="0">
+                  <rows>
+                    <row>
+                      <cell id="{e41a12bc-599d-46be-85ca-e2c681350078}" ordinalvalue="10000">
+                        <labels>
+                          <label description="Contract" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{a0d5255c-e331-4297-a8f8-805e03921086}" ordinalvalue="10001">
+                        <labels>
+                          <label description="Contract Line" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell auto="false" showlabel="true" locklevel="0" rowspan="1" id="{7d716e7b-bccd-4984-afce-02c47a9753c4}" ordinalvalue="10002">
+                        <labels>
+                          <label description="Serial Number" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell auto="false" showlabel="true" locklevel="0" rowspan="1" colspan="1" id="{b5aed07b-ae04-485a-a45a-17b5261fa8a7}" ordinalvalue="10003">
+                        <labels>
+                          <label description="Service Level" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{CF9CD80E-17E4-438D-9705-5575B9BDF2D1}" celllabelposition="Top" columns="1111" labelwidth="115">
+        <rows>
+          <row>
+            <cell id="{58a799a6-a483-30da-d32d-12c15ba0daa0}" showlabel="true" ordinalvalue="10000">
+              <labels>
+                <label description="Priority" languagecode="1033" solutionaction="Modified" />
+              </labels>
+            </cell>
+            <cell id="{67c9b29b-c1b2-aa8e-6b95-5d295b76e224}" showlabel="true" ordinalvalue="20001">
+              <labels>
+                <label description="Created On" languagecode="1033" solutionaction="Modified" />
+              </labels>
+            </cell>
+            <cell id="{d2c3b79d-4172-4f15-aa40-e69aa7bd2ab6}" ordinalvalue="40003">
+              <labels>
+                <label description="Owner" languagecode="1033" solutionaction="Modified" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <events>
+        <event name="onload" application="true" active="true">
+          <Handlers>
+            <Handler functionName="handleTransactionId" libraryName="cr805_caseform" handlerUniqueId="{12b15850-19cf-41c6-80ef-15003b69df15}" enabled="true" parameters="" passExecutionContext="true" ordinalvalue="1" solutionaction="Added" />
+            <Handler functionName="handleVipCustomer" libraryName="cr805_caseform" handlerUniqueId="{4ad50ae2-96aa-423b-8cf1-690c3456284d}" enabled="true" parameters="" passExecutionContext="true" ordinalvalue="2" solutionaction="Added" />
+            <Handler functionName="showFraudWarning" libraryName="cr805_caseform" handlerUniqueId="{b157e3d1-01b9-46d8-80b3-a8eb1124a07b}" enabled="true" parameters="" passExecutionContext="true" ordinalvalue="3" solutionaction="Added" />
+          </Handlers>
+        </event>
+        <event name="onsave" application="true" active="true">
+          <Handlers solutionaction="Added">
+            <Handler functionName="validateCaseResolution" libraryName="cr805_caseform" handlerUniqueId="{915a3720-3c91-458b-9687-0aa9e33d9fb2}" enabled="true" parameters="" passExecutionContext="true" ordinalvalue="0" />
+          </Handlers>
+        </event>
+        <event name="onchange" application="false" active="false" attribute="cr805_issuetype" solutionaction="Added">
+          <Handlers>
+            <Handler functionName="handleTransactionId" libraryName="cr805_caseform" handlerUniqueId="{102b6149-3af3-43da-8063-1637518abddf}" enabled="true" parameters="" passExecutionContext="true" ordinalvalue="0" />
+            <Handler functionName="showFraudWarning" libraryName="cr805_caseform" handlerUniqueId="{8c6d711c-e686-4825-b656-3c91ac56967c}" enabled="true" parameters="" passExecutionContext="true" ordinalvalue="1" />
+          </Handlers>
+        </event>
+        <event name="onchange" application="false" active="false" attribute="cr805_customertier" solutionaction="Added">
+          <Handlers>
+            <Handler functionName="handleVipCustomer" libraryName="cr805_caseform" handlerUniqueId="{97831f73-a939-4bbf-af0d-5d31b3bb87ad}" enabled="true" parameters="" passExecutionContext="true" ordinalvalue="0" />
+          </Handlers>
+        </event>
+        <event name="onchange" application="false" active="false" attribute="cr805_banktransaction" solutionaction="Added">
+          <Handlers>
+            <Handler functionName="handleBankTransaction" libraryName="cr805_caseform" handlerUniqueId="{263fc770-e76a-40fa-878a-1027e31b7085}" enabled="true" parameters="" passExecutionContext="true" ordinalvalue="0" />
+            <Handler functionName="loadBankTransactionDetails" libraryName="msdyn_CopilotCaseSummaryLibrary.js" handlerUniqueId="{3dc314d8-058a-4d99-8fae-c8ec573f5eb1}" enabled="true" parameters="" passExecutionContext="true" ordinalvalue="1" />
+          </Handlers>
+        </event>
+        <event name="onchange" application="false" active="false" attribute="cr805_resolutiondescription" solutionaction="Added">
+          <Handlers>
+            <Handler functionName="createBankTransaction" libraryName="cr805_caseform" handlerUniqueId="{71f1887d-8578-418b-bd72-f9f62b475af6}" enabled="false" parameters="" passExecutionContext="true" ordinalvalue="0" />
+          </Handlers>
+        </event>
+        <event name="onchange" application="false" active="false" attribute="cr805_resolutiontype" solutionaction="Added">
+          <Handlers>
+            <Handler functionName="updateCurrentCase" libraryName="cr805_caseform" handlerUniqueId="{b882ac9e-c44b-47a9-891e-109abeca8669}" enabled="false" parameters="" passExecutionContext="true" ordinalvalue="0" />
+          </Handlers>
+        </event>
+      </events>
+      <formLibraries>
+        <Library name="cr805_caseform" libraryUniqueId="{05a4ed6b-75a4-41a6-8002-d6c5b2171a5d}" solutionaction="Added" />
+      </formLibraries>
+      <footer id="{6c3a0944-fad5-404e-a03e-ee3eaae171d5}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left" solutionaction="Added">
+        <rows>
+          <row>
+            <cell id="{3d6b826e-6df5-42a6-8d08-12bd10f6b023}" showlabel="false" ordinalvalue="10000">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{480e0925-166f-4e83-a855-b0211d1e35bb}" showlabel="false" ordinalvalue="20001">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{60d66608-f14b-4f57-9a41-6c4c5de593d1}" showlabel="false" ordinalvalue="30002">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+    </form>
+    <LocalizedNames>
+      <LocalizedName description="Case" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="Updated default Case form." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

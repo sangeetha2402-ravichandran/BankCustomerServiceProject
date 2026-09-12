@@ -1,0 +1,149 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cr805_sharedcommondataserviceforapps_b8f42"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      },
+      "shared_office365": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cr805_sharedoffice365_d3068"
+        },
+        "api": {
+          "name": "shared_office365"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "When_a_row_is_added,_modified_or_deleted": {
+          "metadata": {
+            "operationMetadataId": "7b15261a-3127-4b1b-b105-0d27765fda29"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 3,
+              "subscriptionRequest/entityname": "incident",
+              "subscriptionRequest/scope": 4
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Condition": {
+          "actions": {
+            "Update_a_row": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "92e5d3f8-6617-4c10-956b-949fb5ce7f53"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "UpdateOnlyRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "incidents",
+                  "recordId": "@triggerOutputs()?['body/incidentid']",
+                  "item/cr805_escalationrequired": true
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Send_an_email_(V2)": {
+              "runAfter": {
+                "Update_a_row": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "775245f8-7c5b-474a-89ed-d423f5608eaa"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_office365",
+                  "operationId": "SendEmailV2",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+                },
+                "parameters": {
+                  "emailMessage/To": "Sangeetha2402.ravichandran@outlook.com",
+                  "emailMessage/Subject": "Urgent Bank Case Escalation - @{outputs('Update_a_row')?['body/title']}",
+                  "emailMessage/Body": "<p>A high-priority/VIP/Fraud Case has been escalated.<br>\n<br>\nCase: @{outputs('Update_a_row')?['body/title']}<br>\nPriority: High<br>\n<br>\n<br>\nPlease review this Case.</p>",
+                  "emailMessage/Importance": "Normal"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {},
+          "expression": {
+            "and": [
+              {
+                "or": [
+                  {
+                    "equals": [
+                      "@triggerOutputs()?['body/cr805_casecategory']",
+                      576030002
+                    ]
+                  },
+                  {
+                    "equals": [
+                      "@triggerOutputs()?['body/cr805_customertier']",
+                      576030002
+                    ]
+                  },
+                  {
+                    "equals": [
+                      "@triggerOutputs()?['body/prioritycode']",
+                      1
+                    ]
+                  }
+                ]
+              },
+              {
+                "equals": [
+                  "@triggerOutputs()?['body/cr805_escalationrequired']",
+                  "@false"
+                ]
+              }
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "3d414d82-81bd-4e63-a894-3ebb8537edb7"
+          },
+          "type": "If"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

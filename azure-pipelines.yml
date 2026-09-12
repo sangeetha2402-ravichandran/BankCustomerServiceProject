@@ -1,0 +1,585 @@
+trigger: none
+
+
+# =========================================================
+# PARAMETERS
+# =========================================================
+
+parameters:
+
+# ---------------------------------------------------------
+# Deployment behaviour
+# ---------------------------------------------------------
+
+- name: deploymentType
+  displayName: 'Deployment Type'
+  type: string
+  default: update
+  values:
+  - patch
+  - update
+  - upgrade
+
+
+# ---------------------------------------------------------
+# Power Platform solution
+#
+# UPDATE:
+#   solutionUniqueName = normal solution
+#
+# PATCH:
+#   solutionUniqueName = patch solution
+#   baseSolutionUniqueName = parent/base solution
+#
+# UPGRADE:
+#   solutionUniqueName = new solution version
+#   baseSolutionUniqueName = existing base solution
+# ---------------------------------------------------------
+
+- name: solutionUniqueName
+  displayName: 'Solution Unique Name'
+  type: string
+  default: bank-proj
+
+- name: baseSolutionUniqueName
+  displayName: 'Base Solution Unique Name'
+  type: string
+  default: bank-proj
+
+
+# ---------------------------------------------------------
+# Power Platform service connections
+# ---------------------------------------------------------
+
+- name: devServiceConnection
+  displayName: 'DEV Service Connection'
+  type: string
+  default: DEV
+
+- name: testServiceConnection
+  displayName: 'TEST Service Connection'
+  type: string
+  default: test
+
+
+# ---------------------------------------------------------
+# TEST environment deployment settings
+# Environment Variables + Connection References
+# ---------------------------------------------------------
+
+- name: deploymentSettingsFile
+  displayName: 'TEST Deployment Settings File'
+  type: string
+  default: deployment-settings/test.json
+
+
+# =========================================================
+# AGENT
+# =========================================================
+
+pool:
+  vmImage: 'windows-latest'
+
+
+# =========================================================
+# COMMON VARIABLES
+# =========================================================
+
+variables:
+
+  solutionName: ${{ parameters.solutionUniqueName }}
+
+  buildConfiguration: 'Release'
+
+  buildArtifactName: 'BuildOutput'
+
+  solutionArtifactName: 'PowerPlatformSolution'
+
+
+
+# =========================================================
+# STAGE 1 - CI
+#
+# Restore
+# Build every Visual Studio solution
+# Run every test project
+# Collect all build output
+# Publish CI artifact
+# =========================================================
+
+stages:
+
+- stage: CI
+  displayName: 'CI - Build and Test'
+
+  jobs:
+
+  - job: BuildAndTest
+    displayName: 'Build and test repository'
+
+    steps:
+
+
+    # -----------------------------------------------------
+    # Checkout repository
+    # -----------------------------------------------------
+
+    - checkout: self
+      clean: true
+
+
+    # -----------------------------------------------------
+    # Install NuGet
+    # -----------------------------------------------------
+
+    - task: NuGetToolInstaller@1
+      displayName: 'Install NuGet'
+
+
+    # -----------------------------------------------------
+    # Restore ALL Visual Studio solutions
+    # No project name is hard coded
+    # -----------------------------------------------------
+
+    - task: NuGetCommand@2
+      displayName: 'Restore NuGet packages'
+      inputs:
+        restoreSolution: '**/*.sln'
+
+
+    # -----------------------------------------------------
+    # Build ALL Visual Studio solutions
+    # -----------------------------------------------------
+
+    - task: VSBuild@1
+      displayName: 'Build all projects'
+      inputs:
+        solution: '**/*.sln'
+        platform: 'Any CPU'
+        configuration: '$(buildConfiguration)'
+        msbuildArgs: '/p:SignAssembly=false'
+
+
+    # -----------------------------------------------------
+    # Run ALL test assemblies
+    #
+    # Examples automatically matched:
+    #
+    # Bank.Tests.dll
+    # Plugin.Tests.dll
+    # IntegrationTests.dll
+    # CustomerServiceTest.dll
+    #
+    # Nothing project-specific is hard coded
+    # -----------------------------------------------------
+
+    - task: VSTest@2
+      displayName: 'Run unit tests'
+      inputs:
+        testSelector: 'testAssemblies'
+
+        testAssemblyVer2: |
+          **\bin\$(buildConfiguration)\*Tests.dll
+          **\bin\$(buildConfiguration)\*Test.dll
+          !**\obj\**
+          !**\ref\**
+
+        searchFolder: '$(System.DefaultWorkingDirectory)'
+
+
+    # -----------------------------------------------------
+    # Collect ALL build outputs
+    #
+    # No specific DLL/PDB name
+    # -----------------------------------------------------
+
+    - task: CopyFiles@2
+      displayName: 'Collect build outputs'
+      inputs:
+
+        SourceFolder: '$(Build.SourcesDirectory)'
+
+        Contents: |
+          **\bin\$(buildConfiguration)\*.dll
+          **\bin\$(buildConfiguration)\*.pdb
+          !**\obj\**
+
+        TargetFolder: '$(Build.ArtifactStagingDirectory)\BuildOutput'
+
+
+    # -----------------------------------------------------
+    # Publish common build artifact
+    # -----------------------------------------------------
+
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish build artifact'
+      inputs:
+
+        targetPath: '$(Build.ArtifactStagingDirectory)\BuildOutput'
+
+        artifact: '$(buildArtifactName)'
+
+        publishLocation: 'pipeline'
+
+
+
+# =========================================================
+# STAGE 2 - EXPORT FROM DEV
+#
+# Publish DEV customizations
+# Export selected solution as Managed
+# Publish managed solution artifact
+# =========================================================
+
+- stage: Export_DEV
+  displayName: 'Export solution from DEV'
+
+  dependsOn: CI
+
+  condition: succeeded()
+
+
+  jobs:
+
+  - job: ExportSolution
+    displayName: 'Export selected Power Platform solution'
+
+
+    steps:
+
+
+    # -----------------------------------------------------
+    # Power Platform Build Tools
+    # -----------------------------------------------------
+
+    - task: microsoft-IsvExpTools.PowerPlatform-BuildTools.tool-installer.PowerPlatformToolInstaller@2
+      displayName: 'Install Power Platform Tools'
+
+
+    # -----------------------------------------------------
+    # Publish DEV changes
+    # -----------------------------------------------------
+
+    - task: microsoft-IsvExpTools.PowerPlatform-BuildTools.publish-customizations.PowerPlatformPublishCustomizations@2
+      displayName: 'Publish DEV customizations'
+
+      inputs:
+
+        authenticationType: 'PowerPlatformSPN'
+
+        PowerPlatformSPN: '${{ parameters.devServiceConnection }}'
+
+
+    # -----------------------------------------------------
+    # Export selected solution as MANAGED
+    #
+    # Solution is supplied when pipeline is run
+    # -----------------------------------------------------
+
+    - task: microsoft-IsvExpTools.PowerPlatform-BuildTools.export-solution.PowerPlatformExportSolution@2
+      displayName: 'Export managed solution'
+
+      inputs:
+
+        authenticationType: 'PowerPlatformSPN'
+
+        PowerPlatformSPN: '${{ parameters.devServiceConnection }}'
+
+        SolutionName: '${{ parameters.solutionUniqueName }}'
+
+        SolutionOutputFile: '$(Build.ArtifactStagingDirectory)\$(solutionName)_managed.zip'
+
+        Managed: true
+
+        MaxAsyncWaitTime: 120
+
+
+    # -----------------------------------------------------
+    # Publish deployment artifact
+    # -----------------------------------------------------
+
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish Power Platform solution artifact'
+
+      inputs:
+
+        targetPath: '$(Build.ArtifactStagingDirectory)\$(solutionName)_managed.zip'
+
+        artifact: '$(solutionArtifactName)'
+
+        publishLocation: 'pipeline'
+
+
+
+# =========================================================
+# STAGE 3 - MANUAL APPROVAL
+#
+# Nothing reaches TEST until somebody approves it
+# =========================================================
+
+- stage: Approval_TEST
+  displayName: 'Approval before TEST'
+
+  dependsOn: Export_DEV
+
+  condition: succeeded()
+
+
+  jobs:
+
+  - job: WaitForApproval
+    displayName: 'Wait for TEST deployment approval'
+
+    pool: server
+
+
+    # Whole approval job can remain open for 24 hours
+    timeoutInMinutes: 1440
+
+
+    steps:
+
+    - task: ManualValidation@0
+      displayName: 'Approve deployment to TEST'
+
+
+      # Approval itself waits 12 hours
+      timeoutInMinutes: 720
+
+
+      inputs:
+
+        notifyUsers: '$(Build.RequestedForEmail)'
+
+
+        instructions: |
+
+          Review the CI build and Power Platform solution artifact.
+
+          ----------------------------------------
+          Deployment Information
+          ----------------------------------------
+
+          Deployment Type:
+          ${{ parameters.deploymentType }}
+
+          Solution:
+          ${{ parameters.solutionUniqueName }}
+
+          Base Solution:
+          ${{ parameters.baseSolutionUniqueName }}
+
+          DEV Service Connection:
+          ${{ parameters.devServiceConnection }}
+
+          TEST Service Connection:
+          ${{ parameters.testServiceConnection }}
+
+          ----------------------------------------
+
+          If everything looks correct,
+          click Resume to deploy to TEST.
+
+
+        onTimeout: 'reject'
+
+
+
+# =========================================================
+# STAGE 4 - CD
+#
+# Deploy selected managed solution into TEST
+#
+# Supports:
+#
+# PATCH
+# UPDATE
+# UPGRADE
+# =========================================================
+
+- stage: Deploy_TEST
+  displayName: 'CD - Deploy solution to TEST'
+
+  dependsOn: Approval_TEST
+
+  condition: succeeded()
+
+
+  jobs:
+
+  - job: ImportSolution
+    displayName: 'Deploy solution into TEST'
+
+
+    steps:
+
+
+    # -----------------------------------------------------
+    # Download managed solution produced by this run
+    # -----------------------------------------------------
+
+    - task: DownloadPipelineArtifact@2
+      displayName: 'Download Power Platform solution artifact'
+
+      inputs:
+
+        buildType: 'current'
+
+        artifactName: '$(solutionArtifactName)'
+
+        targetPath: '$(Pipeline.Workspace)\PowerPlatformSolution'
+
+
+    # -----------------------------------------------------
+    # Install Power Platform Build Tools
+    # -----------------------------------------------------
+
+    - task: microsoft-IsvExpTools.PowerPlatform-BuildTools.tool-installer.PowerPlatformToolInstaller@2
+      displayName: 'Install Power Platform Tools'
+
+
+
+    # =====================================================
+    # PATCH DEPLOYMENT
+    #
+    # Example:
+    #
+    # Small production/test hotfix
+    # Limited changes
+    # Plugin fix
+    # JavaScript fix
+    # Small component change
+    #
+    # solutionUniqueName should be the PATCH solution
+    # =====================================================
+
+    - ${{ if eq(parameters.deploymentType, 'patch') }}:
+
+
+      - task: microsoft-IsvExpTools.PowerPlatform-BuildTools.import-solution.PowerPlatformImportSolution@2
+        displayName: 'Import Patch into TEST'
+
+
+        inputs:
+
+          authenticationType: 'PowerPlatformSPN'
+
+          PowerPlatformSPN: '${{ parameters.testServiceConnection }}'
+
+
+          SolutionInputFile: '$(Pipeline.Workspace)\PowerPlatformSolution\$(solutionName)_managed.zip'
+
+
+          AsyncOperation: true
+
+          MaxAsyncWaitTime: 120
+
+          PublishWorkflows: true
+
+
+
+    # =====================================================
+    # UPDATE DEPLOYMENT
+    #
+    # Standard managed solution deployment.
+    #
+    # Environment-specific configuration comes from:
+    #
+    # deployment-settings/test.json
+    #
+    # This can contain:
+    #
+    # Environment Variables
+    # Connection References
+    # =====================================================
+
+    - ${{ if eq(parameters.deploymentType, 'update') }}:
+
+
+      - task: microsoft-IsvExpTools.PowerPlatform-BuildTools.import-solution.PowerPlatformImportSolution@2
+        displayName: 'Import Update into TEST'
+
+
+        inputs:
+
+          authenticationType: 'PowerPlatformSPN'
+
+          PowerPlatformSPN: '${{ parameters.testServiceConnection }}'
+
+
+          SolutionInputFile: '$(Pipeline.Workspace)\PowerPlatformSolution\$(solutionName)_managed.zip'
+
+
+          UseDeploymentSettingsFile: true
+
+          DeploymentSettingsFile: '$(Build.SourcesDirectory)\${{ parameters.deploymentSettingsFile }}'
+
+
+          AsyncOperation: true
+
+          MaxAsyncWaitTime: 120
+
+          PublishWorkflows: true
+
+
+
+    # =====================================================
+    # UPGRADE - STEP 1
+    #
+    # Import new version as Holding Solution
+    # =====================================================
+
+    - ${{ if eq(parameters.deploymentType, 'upgrade') }}:
+
+
+      - task: microsoft-IsvExpTools.PowerPlatform-BuildTools.import-solution.PowerPlatformImportSolution@2
+        displayName: 'Stage solution for Upgrade'
+
+
+        inputs:
+
+          authenticationType: 'PowerPlatformSPN'
+
+          PowerPlatformSPN: '${{ parameters.testServiceConnection }}'
+
+
+          SolutionInputFile: '$(Pipeline.Workspace)\PowerPlatformSolution\$(solutionName)_managed.zip'
+
+
+          UseDeploymentSettingsFile: true
+
+          DeploymentSettingsFile: '$(Build.SourcesDirectory)\${{ parameters.deploymentSettingsFile }}'
+
+
+          HoldingSolution: true
+
+
+          AsyncOperation: true
+
+          MaxAsyncWaitTime: 120
+
+          PublishWorkflows: true
+
+
+
+      # ===================================================
+      # UPGRADE - STEP 2
+      #
+      # Apply holding solution and complete upgrade
+      # ===================================================
+
+      - task: microsoft-IsvExpTools.PowerPlatform-BuildTools.apply-solution-upgrade.PowerPlatformApplySolutionUpgrade@2
+        displayName: 'Apply Solution Upgrade'
+
+
+        inputs:
+
+          authenticationType: 'PowerPlatformSPN'
+
+          PowerPlatformSPN: '${{ parameters.testServiceConnection }}'
+
+
+          SolutionName: '${{ parameters.baseSolutionUniqueName }}'
+
+
+          MaxAsyncWaitTime: 120

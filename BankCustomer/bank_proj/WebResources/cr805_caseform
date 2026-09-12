@@ -1,0 +1,333 @@
+function handleTransactionId(executionContext) {
+    var formContext = executionContext.getFormContext();
+
+    var issueType = formContext.getAttribute("cr805_issuetype");
+    var transactionId = formContext.getAttribute("cr805_transactionid");
+    var transactionControl = formContext.getControl("cr805_transactionid");
+
+    if (!issueType || !transactionId || !transactionControl) {
+        return;
+    }
+
+    var issueTypeValue = issueType.getValue();
+
+    // Fraud Transaction = 576030002
+    if (issueTypeValue === 576030002) {
+        transactionControl.setVisible(true);
+        transactionId.setRequiredLevel("required");
+    } else {
+        transactionControl.setVisible(false);
+        transactionId.setRequiredLevel("none");
+        transactionId.setValue(null);
+    }
+}
+
+
+function handleVipCustomer(executionContext) {
+    var formContext = executionContext.getFormContext();
+
+    var customerTier = formContext.getAttribute("cr805_customertier");
+    var priority = formContext.getAttribute("prioritycode");
+    var escalationRequired = formContext.getAttribute("cr805_escalationrequired");
+
+    if (!customerTier || !priority || !escalationRequired) {
+        return;
+    }
+
+    var tierValue = customerTier.getValue();
+
+    // VIP
+    if (tierValue === 576030002) {
+        priority.setValue(1);      // High
+        escalationRequired.setValue(true);
+    }
+    else {
+        priority.setValue(2);      // Normal
+        escalationRequired.setValue(false);
+    }
+}
+
+function showFraudWarning(executionContext) {
+    var formContext = executionContext.getFormContext();
+
+    var issueType = formContext.getAttribute("cr805_issuetype");
+
+    if (!issueType) {
+        return;
+    }
+
+    var issueTypeValue = issueType.getValue();
+
+    if (issueTypeValue === 576030002) {
+        formContext.ui.setFormNotification(
+            "Fraud transaction selected. Please verify transaction details and escalate if required.",
+            "WARNING",
+            "fraudWarning"
+        );
+    } else {
+        formContext.ui.clearFormNotification("fraudWarning");
+    }
+}
+
+function validateCaseResolution(executionContext) {
+    var formContext = executionContext.getFormContext();
+    var eventArgs = executionContext.getEventArgs();
+
+    var resolutionType = formContext.getAttribute("cr805_resolutiontype");
+    var resolutionDescription = formContext.getAttribute("cr805_resolutiondescription");
+
+    if (!resolutionType || !resolutionDescription) {
+        return;
+    }
+
+    var resolutionTypeValue = resolutionType.getValue();
+    var resolutionDescriptionValue = resolutionDescription.getValue();
+
+    if (!resolutionTypeValue || !resolutionDescriptionValue) {
+        formContext.ui.setFormNotification(
+            "Please enter Resolution Type and Resolution Description before saving.",
+            "ERROR",
+            "resolutionValidation"
+        );
+
+        eventArgs.preventDefault();
+        return;
+    }
+
+    formContext.ui.clearFormNotification("resolutionValidation");
+}
+
+function handleBankTransaction(executionContext) {
+
+    var formContext = executionContext.getFormContext();
+
+    var bankTransaction =
+        formContext.getAttribute("cr805_banktransaction");
+
+    if (!bankTransaction) {
+        return;
+    }
+
+    var lookupValue = bankTransaction.getValue();
+
+    // Nothing selected
+    if (lookupValue === null || lookupValue.length === 0) {
+
+        formContext.ui.clearFormNotification(
+            "bankTransactionInfo"
+        );
+
+        return;
+    }
+
+    // Lookup returns an array
+    var transaction = lookupValue[0];
+
+    var transactionId = transaction.id;
+    var transactionName = transaction.name;
+    var entityType = transaction.entityType;
+
+    // Remove { } from GUID
+    transactionId = transactionId.replace("{", "").replace("}", "");
+
+    console.log("Transaction GUID: " + transactionId);
+    console.log("Transaction Name: " + transactionName);
+    console.log("Entity Type: " + entityType);
+
+    formContext.ui.setFormNotification(
+        "Selected Bank Transaction: " + transactionName,
+        "INFO",
+        "bankTransactionInfo"
+    );
+}
+
+
+function loadBankTransactionDetails(executionContext) {
+
+    var formContext = executionContext.getFormContext();
+
+    var bankTransaction =
+        formContext.getAttribute("cr805_banktransaction");
+
+    if (!bankTransaction) return;
+
+    var lookupValue = bankTransaction.getValue();
+
+    if (!lookupValue || lookupValue.length === 0) {
+        formContext.ui.clearFormNotification("suspiciousTransaction");
+        return;
+    }
+
+    var recordId = lookupValue[0].id
+        .replace("{", "")
+        .replace("}", "");
+
+    Xrm.WebApi.retrieveRecord(
+        "cr805_banktransaction",
+        recordId,
+        "?$select=cr805_transactionid,cr805_amount,cr805_fraudsuspected,cr805_transactionstatus"
+    ).then(
+
+        function success(result) {
+
+            console.log("Transaction ID:", result.cr805_transactionid);
+            console.log("Amount:", result.cr805_amount);
+            console.log("Fraud Suspected:", result.cr805_fraudsuspected);
+            console.log("Status:", result.cr805_transactionstatus);
+
+            // Populate Transaction ID on Case
+            var caseTransactionId =
+                formContext.getAttribute("cr805_transactionid");
+
+            if (caseTransactionId) {
+                caseTransactionId.setValue(result.cr805_transactionid);
+            }
+
+            // If transaction is suspicious
+            if (result.cr805_fraudsuspected === true) {
+
+                formContext.ui.setFormNotification(
+                    "WARNING: The selected transaction is marked as suspected fraud.",
+                    "WARNING",
+                    "suspiciousTransaction"
+                );
+
+                var priority =
+                    formContext.getAttribute("prioritycode");
+
+                var escalation =
+                    formContext.getAttribute("cr805_escalationrequired");
+
+                if (priority) {
+                    priority.setValue(1); // High
+                }
+
+                if (escalation) {
+                    escalation.setValue(true);
+                }
+
+            } else {
+
+                formContext.ui.clearFormNotification(
+                    "suspiciousTransaction"
+                );
+            }
+        },
+
+        function error(error) {
+
+            console.error(
+                "Bank Transaction retrieval failed:",
+                error.message
+            );
+
+            formContext.ui.setFormNotification(
+                "Unable to retrieve Bank Transaction details.",
+                "ERROR",
+                "transactionLoadError"
+            );
+        }
+    );
+}
+
+function updateCurrentCase(executionContext) {
+
+    var formContext = executionContext.getFormContext();
+
+    var caseId = formContext.data.entity.getId();
+
+    if (!caseId) {
+        Xrm.Navigation.openAlertDialog({
+            text: "Please save the Case first."
+        });
+        return;
+    }
+
+    caseId = caseId.replace("{", "").replace("}", "");
+
+    var data = {
+        "prioritycode": 1, // High
+        "cr805_escalationrequired": true
+    };
+
+    Xrm.WebApi.updateRecord(
+        "incident",
+        caseId,
+        data
+    ).then(
+        function success(result) {
+
+            console.log("Case updated successfully.");
+            console.log("Case ID: " + result.id);
+
+            formContext.ui.setFormNotification(
+                "Case updated successfully using Xrm.WebApi.updateRecord().",
+                "INFO",
+                "caseUpdateSuccess"
+            );
+
+            // Refresh form to display latest values
+            formContext.data.refresh(false);
+        },
+
+        function error(error) {
+
+            console.error("Case update failed: " + error.message);
+
+            formContext.ui.setFormNotification(
+                "Case update failed: " + error.message,
+                "ERROR",
+                "caseUpdateError"
+            );
+        }
+    );
+}
+
+
+function createBankTransaction(executionContext) {
+
+    var formContext = executionContext.getFormContext();
+
+    var transactionNumber =
+        "TX" + new Date().getTime();
+
+    var data = {
+        "cr805_transactionid": transactionNumber,
+        "cr805_amount": 250,
+        "cr805_fraudsuspected": false,
+        "cr805_transactionstatus": 576030000
+    };
+
+    Xrm.WebApi.createRecord(
+        "cr805_banktransaction",
+        data
+    ).then(
+        function success(result) {
+
+            console.log("Bank Transaction created.");
+            console.log("Record ID: " + result.id);
+
+            formContext.ui.setFormNotification(
+                "Bank Transaction created successfully: " +
+                transactionNumber,
+                "INFO",
+                "transactionCreateSuccess"
+            );
+        },
+
+        function error(error) {
+
+            console.error(
+                "Bank Transaction creation failed: " +
+                error.message
+            );
+
+            formContext.ui.setFormNotification(
+                "Unable to create Bank Transaction: " +
+                error.message,
+                "ERROR",
+                "transactionCreateError"
+            );
+        }
+    );
+}

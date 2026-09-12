@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name LocalizedName="Opportunity Competitor Research Result Cache" OriginalName="Opportunity Competitor Research Result Cache">msdyn_OpportunityCompetitorResearchResultCache</Name>
+  <RibbonDiffXml />
+</Entity>

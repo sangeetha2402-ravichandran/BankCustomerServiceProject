@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<InteractionCentricDashboard unmodified="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <LocalizedNames>
+    <LocalizedName description="Contacts Dashboard" languagecode="1033" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="Shows an overview of data related to contacts." languagecode="1033" />
+  </Descriptions>
+  <FormId>{70ad8b15-e3f3-4d7d-9e4b-16cb4e51b484}</FormId>
+</InteractionCentricDashboard>

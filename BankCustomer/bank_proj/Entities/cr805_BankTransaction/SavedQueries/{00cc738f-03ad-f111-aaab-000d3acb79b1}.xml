@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{00cc738f-03ad-f111-aaab-000d3acb79b1}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="cr805_transactionname" select="1" icon="1" preview="1">
+        <row name="result" id="cr805_banktransactionid">
+          <cell name="cr805_referencenumber" width="147" />
+          <cell name="cr805_transactionid" width="200" />
+          <cell name="cr805_transactiontype" width="137" />
+          <cell name="cr805_transactionstatus" width="144" />
+          <cell name="cr805_transactionname" width="143" />
+          <cell name="cr805_account" width="100" />
+          <cell name="cr805_transactiondate" width="200" />
+          <cell name="cr805_amount" width="200" />
+          <cell name="cr805_merchantname" width="200" />
+          <cell name="cr805_fraudsuspected" width="200" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="true">
+        <entity name="cr805_banktransaction">&lt;attribute name="cr805_transactionid" /&gt;&lt;attribute name="cr805_transactiondate" /&gt;&lt;attribute name="cr805_amount" /&gt;&lt;attribute name="cr805_merchantname" /&gt;&lt;attribute name="cr805_fraudsuspected" /&gt;
+        <attribute name="cr805_transactionid" /><attribute name="cr805_transactiondate" /><attribute name="cr805_amount" /><attribute name="cr805_merchantname" /><attribute name="cr805_fraudsuspected" /><attribute name="cr805_banktransactionid" /><order attribute="cr805_transactiondate" descending="true" /><filter type="and"><condition attribute="cr805_fraudsuspected" operator="eq" value="1" /></filter><attribute name="cr805_account" /><attribute name="cr805_transactionname" /><attribute name="cr805_transactionstatus" /><attribute name="cr805_transactiontype" /><attribute name="cr805_referencenumber" /></entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Suspicious Fraud Transactions" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>
