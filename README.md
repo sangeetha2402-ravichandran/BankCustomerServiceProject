@@ -532,15 +532,15 @@ Case Logic   customer scenario
 
 The flow searches Dataverse to identify the sender before continuing with customer-service processing.
 
-### Screenshot
 
-![Incoming email and Contact lookup](docs/images/01-email-trigger-contact-lookup.png)
+
+
 
 ### Contact Match Condition
 
 The automation checks whether a matching Dataverse Contact was returned.
 
-![Contact-found condition](docs/images/02-email-flow-condition.png)
+
 
 ---
 
@@ -577,9 +577,7 @@ The implementation practises:
 - selecting the latest relevant record;
 - updating the existing Case when appropriate.
 
-![Existing Case lookup](docs/images/06-existing-case-lookup.png)
 
-![Case update](docs/images/07-case-update.png)
 
 ---
 
@@ -596,7 +594,7 @@ This is useful for preserving information from:
 
 Dynamic content and expressions were used when creating the Note.
 
-![Note creation](docs/images/08-note-creation-expression.png)
+
 
 ---
 
@@ -626,7 +624,7 @@ Already Escalated?
 Apply required escalation action
 ```
 
-![Escalation condition](docs/images/03-escalation-condition.png)
+
 
 This pattern is useful for fraud and other time-sensitive banking scenarios.
 
@@ -655,8 +653,6 @@ Table   : Case
 Logical : incident
 Message : Create
 ```
-
-![Registered plug-in step](docs/images/09-plugin-step-registration.png)
 
 ---
 
@@ -712,7 +708,6 @@ Unit testing was added for the plug-in implementation.
 
 A successful high-priority Case test was produced after development and debugging iterations.
 
-![Successful plug-in unit test](docs/images/10-plugin-unit-test-pass.png)
 
 This demonstrates that the plug-in work was not limited to writing C# code; registration, execution and testing were also practised.
 
@@ -1131,11 +1126,10 @@ During Power Automate testing, a Dataverse **Add a new row** operation produced 
 
 Instead of rebuilding the flow immediately, the run history was inspected to determine the failing action and incorrect record reference.
 
-![OData failure investigation](docs/images/04-escalation-failure-troubleshooting.png)
+
 
 The condition result and subsequent actions were also inspected from flow run history.
 
-![Flow run result](docs/images/05-flow-run-condition-result.png)
 
 This demonstrates practical troubleshooting of:
 
